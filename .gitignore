@@ -9,3 +9,5 @@
 build/
 docs/build/
 dist/
+*.egg-info
+*.egg
