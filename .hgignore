@@ -4,3 +4,4 @@ syntax: glob
 *.db
 .DS_Store
 .coverage
+dist
