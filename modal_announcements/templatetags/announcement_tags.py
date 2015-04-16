@@ -7,7 +7,7 @@ from django.utils import timezone
 
 from mezzanine import template
 
-from mezzanine_modal_announcements.models import SiteAnnouncement
+from modal_announcements.models import SiteAnnouncement
 
 register = template.Library()
 

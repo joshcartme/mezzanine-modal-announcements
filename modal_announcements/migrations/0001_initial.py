@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
 
     def forwards(self, orm):
         # Adding model 'SiteAnnouncement'
-        db.create_table(u'mezzanine_modal_announcements_siteannouncement', (
+        db.create_table(u'modal_announcements_siteannouncement', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('site', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sites.Site'])),
             ('content', self.gf('mezzanine.core.fields.RichTextField')()),
@@ -22,16 +22,16 @@ class Migration(SchemaMigration):
             ('end_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('weekdays', self.gf('django.db.models.fields.CharField')(max_length=14, blank=True)),
         ))
-        db.send_create_signal(u'mezzanine_modal_announcements', ['SiteAnnouncement'])
+        db.send_create_signal(u'modal_announcements', ['SiteAnnouncement'])
 
 
     def backwards(self, orm):
         # Deleting model 'SiteAnnouncement'
-        db.delete_table(u'mezzanine_modal_announcements_siteannouncement')
+        db.delete_table(u'modal_announcements_siteannouncement')
 
 
     models = {
-        u'mezzanine_modal_announcements.siteannouncement': {
+        u'modal_announcements.siteannouncement': {
             'Meta': {'ordering': "(u'_order',)", 'object_name': 'SiteAnnouncement'},
             '_order': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
             'content': ('mezzanine.core.fields.RichTextField', [], {}),
@@ -53,4 +53,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['mezzanine_modal_announcements']
+    complete_apps = ['modal_announcements']
