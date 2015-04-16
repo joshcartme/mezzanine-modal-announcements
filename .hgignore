@@ -4,6 +4,7 @@ syntax: glob
 *.db
 .DS_Store
 .coverage
+build
 dist
 *.egg-info
 *.egg
