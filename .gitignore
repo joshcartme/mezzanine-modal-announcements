@@ -1,0 +1,11 @@
+*.pyc
+*.pyo
+*.db
+*.pot
+*.doctree
+.doctrees
+.DS_Store
+.coverage
+build/
+docs/build/
+dist/

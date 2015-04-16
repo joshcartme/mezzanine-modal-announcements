@@ -1,0 +1,59 @@
+{% load announcement_tags mezzanine_tags %}
+
+{% get_announcements as announcements %}
+{% if announcements %}
+<div class="site-announcements">
+    {% for modal in announcements %}
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">{{ modal.title }}</h4>
+                </div>
+                <div class="modal-body">
+                    {{ modal.content|richtext_filters|safe }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    {% if not forloop.last %}<button type="button" class="btn btn-primary show-next" data-dismiss="modal">Show next announcement</button>{% endif %}
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    {% endfor %}
+</div>
+<script>
+    function createCookie(name,value,minutes) {
+        if (minutes) {
+            var date = new Date();
+            date.setTime(date.getTime()+(minutes*60*1000));
+            var expires = "; expires="+date.toGMTString();
+        }
+        else var expires = "";
+        document.cookie = name+"="+value+expires+"; path=/";
+    }
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return false;
+    }
+    $(document).ready(function() {
+        cookie = readCookie('announcements-shown');
+        if (cookie == false || window.location.hash == '#popup'){
+            $('.site-announcements .modal').first().modal();
+            createCookie('announcements-shown', true, {{ settings.ANNOUNCEMENT_FREQUENCY }});
+        }
+
+        $('button.show-next').click(function(){
+            $(this).closest('.modal').next('.modal').modal();
+        });
+    });
+</script>
+    
+{% endif %}
